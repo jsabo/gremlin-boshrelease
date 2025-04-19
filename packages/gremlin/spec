@@ -1,0 +1,22 @@
+---
+name: gremlin
+dependencies: []
+
+archives:
+  - name: gremlin.tar.gz
+    version: "2.XX.0"
+    sha1: "<sha1 from bosh add-blob>"
+
+  - name: gremlind.tar.gz
+    version: "2.XX.0"
+    sha1: "<sha1 from bosh add-blob>"
+
+compile: |
+  mkdir -p ${BOSH_INSTALL_TARGET}/bin ${BOSH_INSTALL_TARGET}/sbin
+  tar xzf gremlin.tar.gz  -C ${BOSH_INSTALL_TARGET}/bin  --strip-components=1 usr/bin
+  tar xzf gremlind.tar.gz -C ${BOSH_INSTALL_TARGET}/sbin --strip-components=1 usr/sbin
+
+install: |
+  chmod +x ${BOSH_INSTALL_TARGET}/bin/gremlin*
+  chmod +x ${BOSH_INSTALL_TARGET}/sbin/gremlind
+

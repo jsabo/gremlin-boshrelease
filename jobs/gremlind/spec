@@ -1,0 +1,38 @@
+---
+name: gremlind
+
+templates:
+  pre-start.sh: bin/pre-start.sh
+  config.yaml:  config.yaml
+  start.sh:     bin/start.sh
+  stop.sh:      bin/stop.sh
+
+packages:
+- gremlin
+
+properties:
+  gremlin.identifier:        { description: "Custom identifier", default: "vm" }
+  gremlin.team_id:           { description: "Gremlin Team ID", default: "" }
+  gremlin.team_secret:       { description: "Gremlin Team Secret", default: "" }
+  gremlin.team_certificate:  { description: "PEM public cert", default: "" }
+  gremlin.team_private_key:  { description: "PEM private key", default: "" }
+  gremlin.tags:              { description: "Custom tags", default: {} }
+  gremlin.https_proxy:       { description: "HTTPS proxy URL", default: "" }
+  gremlin.ssl_cert_file:     { description: "TLS CA for proxy", default: "" }
+  gremlin.push_metrics:      { description: "Push metrics?", default: true }
+  gremlin.collect_processes: { description: "Process collection?", default: false }
+  gremlin.collect_dns:       { description: "DNS collection?", default: true }
+  gremlin.iam_role:          { description: "AWS IAM role ARN", default: "" }
+  gremlin.install_user:      { description: "Linux user for Gremlin files", default: "gremlin" }
+  gremlin.install_group:     { description: "Linux group for Gremlin files", default: "gremlin" }
+  gremlin.install_bin_mode:  { description: "File mode for gremlin executables", default: "0750" }
+  gremlin.install_bin_capabilities:
+    description: "Whether to set Linux caps on gremlin client"
+    default: false
+
+monit:
+  name:     gremlind
+  start:    "/var/vcap/jobs/gremlind/bin/start.sh"
+  stop:     "/var/vcap/jobs/gremlind/bin/stop.sh"
+  pid_file: "/var/vcap/sys/run/gremlind/gremlind.pid"
+
