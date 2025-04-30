@@ -1,0 +1,50 @@
+releases:
+- name: gremlin
+  version: 0.1.36
+
+addons:
+# diego-cell
+- name: gremlind-diego-cell
+  include:
+    instance_groups: [diego-cell]
+  jobs:
+  - name: gremlind
+    release: gremlin
+    properties:
+      gremlin:
+        tags:
+          environment: PCF
+          service: diego-cell
+        team_id:          ((gremlin_team_id))
+        team_certificate: ((gremlin_team_certificate))
+        team_private_key: ((gremlin_team_private_key))
+# diego-api
+- name: gremlind-diego-api
+  include:
+    instance_groups: [diego-api]
+  jobs:
+  - name: gremlind
+    release: gremlin
+    properties:
+      gremlin:
+        tags:
+          environment: PCF
+          service: diego-api
+        team_id:          ((gremlin_team_id))
+        team_certificate: ((gremlin_team_certificate))
+        team_private_key: ((gremlin_team_private_key))
+# credhub
+- name: gremlind-credhub
+  include:
+    instance_groups: [credhub]
+  jobs:
+  - name: gremlind
+    release: gremlin
+    properties:
+      gremlin:
+        tags:
+          environment: PCF
+          service: credhub
+        team_id:          ((gremlin_team_id))
+        team_certificate: ((gremlin_team_certificate))
+        team_private_key: ((gremlin_team_private_key))

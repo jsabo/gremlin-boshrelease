@@ -1,0 +1,28 @@
+---
+# 1) Nuke any existing gremlin in the releases list (no‑op if it's not there)
+- type: remove
+  path: /releases/name=gremlin?
+
+# 2) Append your gremlin release entry
+- type: replace
+  path: /releases/-
+  value:
+    name:    gremlin
+    version: ((release_version))
+
+# 3) Nuke any existing gremlind job in diego‑cell (no‑op if not there)
+- type: remove
+  path: /instance_groups/name=diego-cell/jobs/name=gremlind?
+
+# 4) Append the gremlind job under diego‑cell
+- type: replace
+  path: /instance_groups/name=diego-cell/jobs/-
+  value:
+    name:     gremlind
+    release:  gremlin
+    properties:
+      gremlin:
+        team_id:          ((gremlin_team_id))
+        team_certificate: ((gremlin_team_certificate))
+        team_private_key: ((gremlin_team_private_key))
+        tags:             ((gremlin_tags))

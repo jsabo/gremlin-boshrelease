@@ -1,0 +1,8 @@
+# operations/remove-gremlin.yml
+---
+# remove the gremlind job from diego-cell
+- type: remove
+  path: /instance_groups/name=diego-cell/jobs/name=gremlind?
+# remove the gremlin release entirely
+- type: remove
+  path: /releases/name=gremlin?

@@ -1,0 +1,36 @@
+# ──────────────────────────────────────────────────────────────────────────────
+# BOSH-release build artifacts
+# ──────────────────────────────────────────────────────────────────────────────
+
+# Release tarballs & blobs
+*.tgz
+*.zip
+
+# Built releases & indexes
+releases/
+dev_releases/
+.dev_builds/
+.final_builds/
+
+# Local blob caches
+.blobs/
+blobs/
+
+# ──────────────────────────────────────────────────────────────────────────────
+# Local operator config (credentials, overrides)
+# ──────────────────────────────────────────────────────────────────────────────
+config/dev.yml
+config/private.yml
+config/*.creds.yml
+
+# ──────────────────────────────────────────────────────────────────────────────
+# Editor, OS & temp files
+# ──────────────────────────────────────────────────────────────────────────────
+.DS_Store
+tmp/
+*.swp
+*~
+*#
+#*
+.idea/
+
